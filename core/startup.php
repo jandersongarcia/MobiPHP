@@ -1,8 +1,8 @@
 <?php
 
 # Load base initialization files
-require_once('core/config.php');
-require_once('core/routes.php');
+require_once('config/config.php');
+require_once('config/routes.php');
 require_once('vendor/autoload.php');
 
 # Declare the namespaces of the Classes

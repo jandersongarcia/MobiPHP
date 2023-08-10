@@ -1,0 +1,14 @@
+{
+    "name": "mobiphp",
+    "version": "1.0.0",
+    "description": "Meu projeto utilizando o framework Mobi",
+    "scripts": {
+        "mobi-create-component": "node ./core/js/commands/mobi-create-component.js",
+        "mobi-delete-component": "node ./core/js/commands/mobi-delete-component.js",
+        "mobi-create-page": "node ./core/js/commands/mobi-create-page.js",
+        "mobi-delete-page": "node ./core/js/commands/mobi-delete-page.js"
+    },
+    "dependencies": {
+        "fs": "^0.0.1"
+    }
+}

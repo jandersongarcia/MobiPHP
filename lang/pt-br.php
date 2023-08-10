@@ -1,0 +1,7 @@
+<?php
+    /**
+     * PORTUGUÊS
+     */
+    class language {
+
+    }

@@ -1,7 +1,6 @@
 <div class="card">
     <div class="card-body">
-        <h2 class="card-title text-body-secondary"><i class="bi bi-headset"></i>Chamados</h2>
-        <h6 class="card-subtitle my-3 text-body-secondary">Sistema de atendimento para clientes da CODEXT</h6>
+        <h2 class="card-title text-body-secondary mb-3"><i class="bi bi-headset"></i>Chamados</h2>
         <form id="login">
             <div class="input-group mb-3">
                 <span class="input-group-text"><i class="bi bi-envelope"></i></span>
