@@ -2,12 +2,15 @@
 
 namespace Core;
 
+use lang\Language;
+
 class Mobi
 {
 
     public function __construct()
     {
-        $this->loadPage();
+        $this->uniqId();
+        $this->loadPage($this);
     }
 
     public function counter($tempo_inicial = '')
@@ -18,43 +21,95 @@ class Mobi
         echo $tempo_formatado;
     }
 
+    public function uniqId()
+    {
+        if (empty($_SESSION['LANG']))
+            $_SESSION['LANG'] = md5(uniqid());
+    }
+
+    public function language()
+    {
+        /**
+         * DEFINE THE LANGUAGE CLASS
+         */
+        return CONFIG['language'];
+    }
+
     private function uriFirst($n = 0)
     {
         #
-        # Captures the first path of the uri
+        # CAPTURES THE FIRST PATH OF THE URI
         #
 
         $uri = $_SERVER['REQUEST_URI'];
         $path = parse_url($uri, PHP_URL_PATH);
         $parts = explode('/', trim($path, '/'));
-        $primeiroValor = $parts[$n];
+        $primeiroValor = @$parts[$n];
         return $primeiroValor;
     }
 
-    private function loadPage()
+    private function loadPage($mobi)
     {
+        $uri = $this->uriFirst();
+        $lang = new Language();
 
         #
-        #   Handles page loading
+        #   HANDLES PAGE LOADING
         #
-        $uri = $this->uriFirst();
-        $page = (array_key_exists($uri, ROUTES)) ? ROUTES[$uri] : ROUTES['404'];
+
         if ($uri == 'code') {
             echo $this->build();
-        } elseif (file_exists("pages/$page/$page.php")) {
-            $_SESSION['ROUTE'] = $page;
-            $m = new components();
-            require_once("pages/$page/$page.php");
+        } else if ($uri == 'mobiPost') {
+
+            $component = $this->uriFirst(1);
+            $path = "components/$component/$component.model.php";
+            if (file_exists($path)) {
+                require_once($path);
+            }
+
+        } else if ($uri == 'mobiComponent'){
+
+            $page = $this->uriFirst(1);
+            if(file_exists("components/$page/$page.model.php")){
+                require("components/$page/$page.model.php");
+            } else{
+                $message = ["message" => "The component not found"];
+                echo json_encode($message,true);
+
+            }
+
+        } else if ($uri == 'mobiLoadPage') {
+            $page = $this->uriFirst(1);
+            if (file_exists("src/pages/$page/$page.php")) {
+
+                $m = new components();
+
+
+                if (file_exists("src/pages/$page/$page.css")) {
+                    #echo "<style>@import '/code/mobiComponent/css/$page'</style>";
+                }
+
+                require_once("src/pages/$page/$page.php");
+
+                if (file_exists("src/pages/$page/$page.js")) {
+                    #echo '<script src="/code/mobiComponent/js/' . $page . '"></script>';
+                }
+
+
+            } else {
+                echo "route error $page";
+            }
+
         } else {
-            $_SESSION['ROUTE'] = false;
-            echo "route error $page";
+            require_once('src/starting.php');
         }
+
     }
 
     private function build()
     {
         #
-        #   Build css or js
+        #   BUILD CSS OR JS
         #
         $uri = $this->uriFirst(1);
 
@@ -77,37 +132,82 @@ class Mobi
             $obsfucated = $hunter->Obfuscate();
             echo $obsfucated;
 
+        } else if ($uri == 'mobiComponent') {
+
+            $type = @$this->uriFirst(2);
+            $page = @$this->uriFirst(3);
+
+            $code = '';
+
+            if ($type == 'css') {
+                $code = $this->rootStyle();
+                $code .= $this->loadPageCSS();
+                $code .= $this->loadComponentsCSS();
+            } else if ($type == 'js') {
+                $code = $this->loadComponentsJS();
+            }
+
+            echo $code;
+
         }
+
     }
 
-    private function loadPageCSS()
+    private function loadPageCSS($local = false)
     {
 
-        $array = $_SESSION['ROOT_COMPONENT'];
+        $array = @$_SESSION['ROOT_COMPONENT'];
 
-        if (is_array($array)) {
+        $content = '';
+        $filePath = 'core/css/mobi.css';
+
+        if (file_exists($filePath)) {
+            $file = file_get_contents($filePath);
+            if ($file !== false) {
+                #header('Content-Type: text/css');
+                $content .= $file;
+            }
+        }
+
+        if ($local) {
+            $file = "src/pages/$local/$local.css";
+            if (file_exists($file)) {
+                $content .= file_get_contents($file);
+                #header('Content-Type: text/css');
+                #return $content;
+            }
+        } elseif (is_array($array)) {
             $returnCSS = '';
             foreach ($array as $key => $value) {
-                $file = "pages/$value/$value.css";
+                $file = "src/pages/$value/$value.css";
                 if (file_exists($file)) {
-                    $content = file_get_contents($file);
-                    header('Content-Type: text/css');
-                    $returnCSS .= $content;
+                    $content .= file_get_contents($file);
+                    #header('Content-Type: text/css');
+                    #$returnCSS .= $content;
                 }
             }
-            return $returnCSS;
         }
+        header('Content-Type: text/css');
+        return $content;
+
     }
 
-    private function loadPageJS()
+    private function loadPageJS($local = false)
     {
 
-        $array = $_SESSION['ROOT_COMPONENT'];
+        $array = @$_SESSION['ROOT_COMPONENT'];
 
-        if (is_array($array)) {
+        if ($local) {
+            $file = "src/pages/$local/$local.js";
+            if (file_exists($file)) {
+                $code = file_get_contents($file);
+                $minifier = new \MatthiasMullie\Minify\JS($code);
+                return $minifier;
+            }
+        } else if (is_array($array)) {
             $returnJS = '';
             foreach ($array as $key => $value) {
-                $file = "pages/$value/$value.js";
+                $file = "src/pages/$value/$value.js";
                 if (file_exists($file)) {
                     $content = file_get_contents($file);
                     $returnJS .= $content;
@@ -117,10 +217,10 @@ class Mobi
         }
     }
 
-    private function loadComponentsCSS()
+    private function loadComponentsCSS($local = false)
     {
 
-        $array = $_SESSION['ROOT_COMPONENT'];
+        $array = @$_SESSION['ROOT_COMPONENT'];
 
         if (is_array($array)) {
             $returnCSS = '';
@@ -139,7 +239,7 @@ class Mobi
     private function loadComponentsJS()
     {
 
-        $array = $_SESSION['ROOT_COMPONENT'];
+        $array = @$_SESSION['ROOT_COMPONENT'];
 
         if (is_array($array)) {
             $returnJS = '';
@@ -191,13 +291,19 @@ class Mobi
         #
         #   Checks if exists and loads rootScript.css file
         #
-        $rootScript = "core/js/mobi.js";
+        $rootScript = ["core/js/mobi.js", "core/js/routes.js"];
 
-        if (file_exists($rootScript)) {
-            $fileJS = $rootScript;
-            $contentJS = file_get_contents($fileJS);
-            return $contentJS;
+        $contentJS = '';
+
+        foreach ($rootScript as $rootScript) {
+            if (file_exists($rootScript)) {
+                $fileJS = $rootScript;
+                $contentJS .= file_get_contents($fileJS);
+            }
         }
+
+        return $contentJS;
+
 
     }
 

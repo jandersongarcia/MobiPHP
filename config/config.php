@@ -5,7 +5,7 @@ $_config = [
     /**
      * STANDARD LANGUAGE
      */
-    'language' => 'pr-br',
+    'language' => 'pt-br',
 
     /**
      * CONTACT SYSTEM WITH THE TELEGRAM BOT

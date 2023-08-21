@@ -1,5 +1,5 @@
 {
-  "404": "NoteFound",
-  "login": "Login",
-  "": "Main"
+  "/": "Main",
+  "/notfound": "NotFound",
+  "/about": "About"
 }
