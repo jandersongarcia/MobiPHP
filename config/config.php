@@ -5,25 +5,28 @@ $_config = [
     /**
      * STANDARD LANGUAGE
      */
-    'language' => 'pt-br',
+    'language' => 'en',
+
+    /**
+     * DATABASE CONNECTION SETTINGS
+     */
+    'database' => [
+        'use' => true, // Indicates if database will be used
+        'type' => 'mysql', // Default database type (mysql, postgresql, sqlite)
+        'servername' => 'localhost',
+        'username' => 'root',
+        'password' => '',
+        'database_name' => 'mobi_tasks'
+    ],
 
     /**
      * CONTACT SYSTEM WITH THE TELEGRAM BOT
      */
-    'botFather' => [
-        'token' => '6009722740:AAEAaIwcPZgFm1XbpUQMwxsqCBvEw-lBSYc',
-        'update_id' => '5778065856'
-    ],
-
-    /**
-     * MYSQL BANK CONNECTION DATA
-     */
-    'connection' => [
-        'servername' => 'localhost',
-        'username' => 'root',
-        'password' => '',
-        'database' => ''
+    'telegram_bot' => [
+        'token' => 'YOUR_TELEGRAM_BOT_TOKEN',
+        'update_id' => 'YOUR_TELEGRAM_BOT_UPDATE_ID'
     ]
+
 ];
 
 define('CONFIG', $_config);

@@ -35,11 +35,12 @@ class ComposerStaticInit762062d3a82dccd9be02252947d342f5
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Core\\DataBase' => __DIR__ . '/../..' . '/core/class/dataBase.php',
         'Core\\HunterObfuscator' => __DIR__ . '/../..' . '/core/class/hunterObfuscator.php',
+        'Core\\Internal' => __DIR__ . '/../..' . '/core/class/core.php',
         'Core\\Mobi' => __DIR__ . '/../..' . '/core/class/mobi.php',
         'Core\\alerts' => __DIR__ . '/../..' . '/core/class/alerts.php',
         'Core\\components' => __DIR__ . '/../..' . '/core/class/components.php',
+        'Core\\errorMessage' => __DIR__ . '/../..' . '/core/class/error.message.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

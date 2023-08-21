@@ -2,7 +2,6 @@
 
 namespace Core;
 
-class DataBase
-{
+class Internal {
 
 }

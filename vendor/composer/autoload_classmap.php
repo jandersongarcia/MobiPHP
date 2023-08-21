@@ -7,9 +7,10 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'Core\\DataBase' => $baseDir . '/core/class/dataBase.php',
     'Core\\HunterObfuscator' => $baseDir . '/core/class/hunterObfuscator.php',
+    'Core\\Internal' => $baseDir . '/core/class/core.php',
     'Core\\Mobi' => $baseDir . '/core/class/mobi.php',
     'Core\\alerts' => $baseDir . '/core/class/alerts.php',
     'Core\\components' => $baseDir . '/core/class/components.php',
+    'Core\\errorMessage' => $baseDir . '/core/class/error.message.php',
 );

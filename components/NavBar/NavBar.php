@@ -8,12 +8,8 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="./about"><?= $lang->about; ?></a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="./docs"><?= $lang->documentation; ?></a>
         </li>
-        <!-- Adicione mais links conforme necessário -->
 
         <!-- Dropdown de seleção de idioma -->
         <li class="nav-item dropdown">
