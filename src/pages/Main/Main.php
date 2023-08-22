@@ -10,5 +10,10 @@
 ?>
 
 <section>
-    <h1>Mobi<strong>PHP</strong><h1>
+    <div>
+        <h1>Mobi<strong>PHP</strong><h1>
+        <a href="https://github.com/jandersongarcia/MobiPHP" target="_blank" rel="noopener noreferrer">
+        Documentation in Git
+        </a>
+    </div>
 </section>
