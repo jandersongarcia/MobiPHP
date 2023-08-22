@@ -1,3 +1,4 @@
+
 // Caminho para o arquivo JSON contendo os dados das rotas
 const jsonFilePath = 'core/json/routes.json';
 let pageData; // Declaração da variável

@@ -43,7 +43,18 @@ rl.question(`Enter the route name for the page "${pageName}": `, routeName => {
 
   pageFiles.forEach(filename => {
     const filePath = path.join(pagesDir, filename);
-    fs.writeFileSync(filePath, '', 'utf-8');
+
+    // Adiciona o conteúdo ao arquivo PHP
+    if (filename.endsWith('.php')) {
+      fs.writeFileSync(filePath, `<?php\n\n/**
+ * Use this command to declare the components that will be used
+ * $m->declareComponents(['componente1','componente2']);
+ * Use this command in the location where the component will be loaded
+ * $m->loadComponent('componente2');
+ */\n\n?>`, 'utf-8');
+    } else {
+      fs.writeFileSync(filePath, '', 'utf-8');
+    }
   });
 
   const routesPath = path.join(projectRootDir, 'core/json/routes.json');

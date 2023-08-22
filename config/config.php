@@ -5,7 +5,16 @@ $_config = [
     /**
      * STANDARD LANGUAGE
      */
-    'language' => 'en',
+    'language' => 'pt-br',
+
+    /**
+     * OBFUSCATE
+     */
+    'obfuscate' =>[
+        'html' => false,
+        'css' => false,
+        'js' => false
+    ],
 
     /**
      * DATABASE CONNECTION SETTINGS

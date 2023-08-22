@@ -132,17 +132,17 @@
         },
         {
             "name": "telegram-bot/api",
-            "version": "v2.4.0",
-            "version_normalized": "2.4.0.0",
+            "version": "v2.5.0",
+            "version_normalized": "2.5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TelegramBot/Api.git",
-                "reference": "7bf57218c5b03df490a97e166b96d064291b9ab2"
+                "reference": "eaae3526223db49a1bad76a2dfa501dc287979cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TelegramBot/Api/zipball/7bf57218c5b03df490a97e166b96d064291b9ab2",
-                "reference": "7bf57218c5b03df490a97e166b96d064291b9ab2",
+                "url": "https://api.github.com/repos/TelegramBot/Api/zipball/eaae3526223db49a1bad76a2dfa501dc287979cf",
+                "reference": "eaae3526223db49a1bad76a2dfa501dc287979cf",
                 "shasum": ""
             },
             "require": {
@@ -155,11 +155,11 @@
                 "symfony/phpunit-bridge": "*",
                 "vimeo/psalm": "^5.9"
             },
-            "time": "2023-05-11T15:20:55+00:00",
+            "time": "2023-08-09T13:53:12+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "installation-source": "dist",
@@ -190,104 +190,9 @@
             ],
             "support": {
                 "issues": "https://github.com/TelegramBot/Api/issues",
-                "source": "https://github.com/TelegramBot/Api/tree/v2.4.0"
+                "source": "https://github.com/TelegramBot/Api/tree/v2.5.0"
             },
             "install-path": "../telegram-bot/api"
-        },
-        {
-            "name": "twbs/bootstrap",
-            "version": "v5.3.1",
-            "version_normalized": "5.3.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "2a1bf52b73fc9a97f6fef75aa1b29b3e9f0288b3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/2a1bf52b73fc9a97f6fef75aa1b29b3e9f0288b3",
-                "reference": "2a1bf52b73fc9a97f6fef75aa1b29b3e9f0288b3",
-                "shasum": ""
-            },
-            "replace": {
-                "twitter/bootstrap": "self.version"
-            },
-            "time": "2023-07-26T07:46:38+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mark Otto",
-                    "email": "markdotto@gmail.com"
-                },
-                {
-                    "name": "Jacob Thornton",
-                    "email": "jacobthornton@gmail.com"
-                }
-            ],
-            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
-            "homepage": "https://getbootstrap.com/",
-            "keywords": [
-                "JS",
-                "css",
-                "framework",
-                "front-end",
-                "mobile-first",
-                "responsive",
-                "sass",
-                "web"
-            ],
-            "support": {
-                "issues": "https://github.com/twbs/bootstrap/issues",
-                "source": "https://github.com/twbs/bootstrap/tree/v5.3.1"
-            },
-            "install-path": "../twbs/bootstrap"
-        },
-        {
-            "name": "twbs/bootstrap-icons",
-            "version": "v1.10.5",
-            "version_normalized": "1.10.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twbs/icons.git",
-                "reference": "648aa8238437d9da9227f6273cc163ec5841382d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twbs/icons/zipball/648aa8238437d9da9227f6273cc163ec5841382d",
-                "reference": "648aa8238437d9da9227f6273cc163ec5841382d",
-                "shasum": ""
-            },
-            "time": "2023-04-26T19:56:04+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mark Otto",
-                    "email": "markdotto@gmail.com"
-                }
-            ],
-            "description": "Official open source SVG icon library for Bootstrap",
-            "homepage": "https://icons.getbootstrap.com/",
-            "keywords": [
-                "bootstrap",
-                "icon font",
-                "icons",
-                "svg"
-            ],
-            "support": {
-                "issues": "https://github.com/twbs/icons/issues",
-                "source": "https://github.com/twbs/icons/tree/v1.10.5"
-            },
-            "install-path": "../twbs/bootstrap-icons"
         }
     ],
     "dev": true,

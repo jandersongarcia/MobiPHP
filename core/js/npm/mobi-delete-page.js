@@ -7,11 +7,10 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-const pageName = process.argv[2]; // Nome da pasta com a primeira letra maiúscula
-const pageNameLowerCase = pageName.toLowerCase(); // Convertendo para minúsculas
+const pageName = process.argv[2]; // Nome da página em letras minúsculas
 const projectRootDir = path.join(__dirname, '..', '..', '..');
-const pagesPath = path.join(projectRootDir, 'src/pages', pageName); // Ajuste no caminho
-const routesFilePath = path.join(projectRootDir, 'core/json/routes.json'); // Ajuste no caminho
+const pagesPath = path.join(projectRootDir, 'src/pages', pageName);
+const routesFilePath = path.join(projectRootDir, 'core/json/routes.json');
 
 /// Verifica se a pasta existe
 fs.access(pagesPath, fs.constants.F_OK)
@@ -27,14 +26,17 @@ fs.access(pagesPath, fs.constants.F_OK)
           fs.readFile(routesFilePath, 'utf-8')
             .then(data => {
               const routes = JSON.parse(data);
-              if (routes[`/${pageNameLowerCase}`]) {
-                delete routes[`/${pageNameLowerCase}`];
+              const formattedPageName = pageName.charAt(0).toUpperCase() + pageName.slice(1);
+              const routeKey = `/${formattedPageName}`;
+              
+              if (routes[routeKey]) {
+                delete routes[routeKey];
                 return fs.writeFile(routesFilePath, JSON.stringify(routes, null, 2));
               }
               return Promise.resolve(); // Não é necessário alterar o arquivo se a entrada não existir
             })
             .then(() => {
-              console.log(`The route "/${pageNameLowerCase}" has been removed from routes.json.`);
+              console.log(`The route "/${pageName}" has been removed from routes.json.`);
               console.log('Process completed.');
               rl.close();
             })
