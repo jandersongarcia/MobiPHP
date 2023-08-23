@@ -71,6 +71,7 @@ class components
     {
         $lang = new Language();
         $mobi = new Mobi();
+        $m = new components();
         if (file_exists("$file.php")){
             require_once("$file.php");
         } else {
